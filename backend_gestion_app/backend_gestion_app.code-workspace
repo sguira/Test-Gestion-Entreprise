@@ -1,0 +1,15 @@
+{
+	"folders": [
+		{
+			"name": "backend_gestion_app",
+			"path": "."
+		}
+	],
+	"settings": {
+		"java.configuration.updateBuildConfiguration": "interactive",
+		"java.compile.nullAnalysis.mode": "automatic",
+		"files.watcherExclude": {
+			"**/target": true
+		}
+	}
+}
