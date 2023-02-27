@@ -636,21 +636,25 @@ public class controller {
 
     @PostMapping(path = "/add_tache/{id}")
     ResponseEntity<?> add_tache(@PathVariable(name = "id") Long id, @RequestBody Tache t) {
-        DateFormat format = new SimpleDateFormat("dd-MM-yyyy");
-        Date d = new Date();
-        Tache tr = t;
+        
         tr.setDate_(format.format(d).toString());
         System.out.println(format.format(d));
         Users u = usersR.findById(id).get();
-        u.ajouter_tache(tacheR.save(tr));
+        u.ajouter_tache(tacheR.save(t));
         usersR.save(u);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
-    @GetMapping(path = "/find_days/{id}")
-    List<Tache> find_days(@PathVariable Long id, String date) {
+    @GetMapping(path = "/find_days/{id}/{date}")
+    List<Tache> find_days(@PathVariable Long id, @PathVariable String date) {
+        List<Tache> taches = new ArrayList<>();
 
-        return usersR.findById(id).get().getTaches();
+        usersR.findById(id).get().getTaches().forEach(e -> {
+            if (e.getDate_().equals(date)) {
+                taches.add(e);
+            }
+        });
+        return taches;
     }
 
     @GetMapping(path = "/ventes_semaine/{id}/{date}/{jour_semaine}/{choice}")
