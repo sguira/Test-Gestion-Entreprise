@@ -637,8 +637,7 @@ public class controller {
     @PostMapping(path = "/add_tache/{id}")
     ResponseEntity<?> add_tache(@PathVariable(name = "id") Long id, @RequestBody Tache t) {
         
-        tr.setDate_(format.format(d).toString());
-        System.out.println(format.format(d));
+       
         Users u = usersR.findById(id).get();
         u.ajouter_tache(tacheR.save(t));
         usersR.save(u);
